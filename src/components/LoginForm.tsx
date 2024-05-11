@@ -1,8 +1,15 @@
-
 import Link from "next/link";
-const classBorder = 'border-solid border-2 border-black';
+import { useState } from "react";
+import { logIn } from "@/services/auth/auth.service";
 
 const LoginForm = () => {
+  const [username, setUSerName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async() => {
+    const res = await logIn({ username, password });
+  };
+
   return (
     <>
       <div className={`mt-12`}>
@@ -11,12 +18,16 @@ const LoginForm = () => {
             name="username"
             placeholder="Username"
             className={`py-2 pl-2 rounded-lg bg-neutral-200 placeholder:text-gray-500`}
+            value={ username }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUSerName(e.target.value)}
           ></input>
 
           <input
             name="password"
             placeholder="Password"
             className={`py-2 pl-2 rounded-lg bg-neutral-200 placeholder:text-gray-500`}
+            value={ password }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           ></input>
 
           <div className={`flex justify-end mt-2`}>
@@ -27,6 +38,8 @@ const LoginForm = () => {
           </div>
 
           <button
+            type="button"
+            onClick={async() => await handleLogin}
             className={`mt-4 bg-primary p-2 rounded-lg font-semibold text-secondary text-md`}
           >Sign In</button>
         </form>
