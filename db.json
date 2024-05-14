@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Arthur Teste",
+      "projects": [],
+      "categories": []
+    },
+    {
+      "id": 2,
+      "name": "Maria Teste",
+      "projects": [],
+      "categories": []
+    }
+  ]
+}
