@@ -1,19 +1,31 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from 'next/router'
+import { FormEvent, useState } from "react";
 import { logIn } from "@/services/auth/auth.service";
 
 const LoginForm = () => {
+  const router = useRouter()
+
   const [username, setUSerName] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [alert, setAlert] = useState(false);
 
-  const handleLogin = async() => {
-    const res = await logIn({ username, password });
+  const handleLogin = async(e:FormEvent) => {
+    e.preventDefault();
+    const user = await logIn({ username, password });
+    if (user) {
+      router.push('/home');
+    }
+
+    setErrorMsg('User not found! Please try again.');
+    // TO DO: turn alert to TRUE and show alert component with error message
   };
 
   return (
     <>
       <div className={`mt-12`}>
-        <form className={`flex flex-col gap-4`}>
+        <form className={`flex flex-col gap-4`} onSubmit={handleLogin}>
           <input
             name="username"
             placeholder="Username"
@@ -37,10 +49,7 @@ const LoginForm = () => {
             >Forgot Password?</Link>
           </div>
 
-          <button
-            type="button"
-            onClick={async() => await handleLogin}
-            className={`mt-4 bg-primary p-2 rounded-lg font-semibold text-secondary text-md`}
+          <button className={`mt-4 bg-primary p-2 rounded-lg font-semibold text-secondary text-md hover:bg-secondary hover:text-primary transition ease-in-out delay-150`}
           >Sign In</button>
         </form>
       </div>
