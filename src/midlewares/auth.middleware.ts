@@ -11,7 +11,7 @@ export const authMiddleware: MiddlewareFactory = ( next ) => {
     const isProtectedRoute = protectedRoutes.includes(path);
   
     const cookieStore = cookies();
-    const userId = cookieStore.get('userId')?.value;
+    const userId = cookieStore.get('username')?.value;
   
     if (isProtectedRoute && !userId) {
       return NextResponse.redirect(new URL('/', req.nextUrl));
