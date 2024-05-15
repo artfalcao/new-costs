@@ -39,7 +39,7 @@ const LoginForm = () => {
   const handleLogin = async (values: MySignInProps) => {
     const user = await logIn(values);
     if (user) {
-      router.push('/home');
+      router.push('/dashboard');
     }
 
     setErrorMsg('User not found! Please try again.');

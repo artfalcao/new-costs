@@ -2,7 +2,7 @@ import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { MiddlewareFactory } from './middlewareFactory';
  
-const protectedRoutes = ['/home', '/projects', '/project:id'];
+const protectedRoutes = ['/dashboard', '/projects', '/project:id'];
 const publicRoutes = ['/', '/about', '/signup'];
  
 export const authMiddleware: MiddlewareFactory = ( next ) => {
